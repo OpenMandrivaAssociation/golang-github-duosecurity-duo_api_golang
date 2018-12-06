@@ -1,0 +1,22 @@
+From 0fc7f2345b7f17ea0d18dcd8de92ff358757fbe1 Mon Sep 17 00:00:00 2001
+From: Ed Marshall <esm@logic.net>
+Date: Wed, 14 Mar 2018 21:54:41 -0700
+Subject: [PATCH] Fix Go 1.10 test failure.
+
+---
+ authapi/authapi_test.go | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/authapi/authapi_test.go b/authapi/authapi_test.go
+index 94e182a..f373756 100644
+--- a/authapi/authapi_test.go
++++ b/authapi/authapi_test.go
+@@ -52,7 +52,7 @@ func TestTimeout(t *testing.T) {
+ 	_, err := duo.Ping()
+ 	duration := time.Since(start)
+ 	if duration.Seconds() > 2 {
+-		t.Error("Timeout took %d seconds", duration.Seconds())
++		t.Errorf("Timeout took %v seconds", duration.Seconds())
+ 	}
+ 	if err == nil {
+ 		t.Error("Expected timeout error.")
